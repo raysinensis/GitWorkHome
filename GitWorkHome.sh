@@ -16,7 +16,7 @@ today=$(date "+%m%d%Y")
 	exit 1
   fi
   export function1=$1
-
+##zip option to backup files with date in file name
   if [ $function1 = "zip" ]
   then 
 	for entry in */
@@ -28,8 +28,8 @@ today=$(date "+%m%d%Y")
 		git archive master --format zip -o "$filename"
 		cd ..
 	done
-	
   else
+##simply apply git commands to each folder
 	for entry in */
  	do
   		echo "processing: " "$entry"
@@ -38,6 +38,13 @@ today=$(date "+%m%d%Y")
 		cd ..
   	done
   fi
-
+##date check/reminder for GC clean up  
+  if [ $function1 = "gc" ]
+  then
+	echo "$today" >> gclog.txt
+  else
+	lastd=$(awk 'END{print}' gclog.txt)
+	echo "no housekeeping since: ""$lastd""!"
+  fi
 
 
