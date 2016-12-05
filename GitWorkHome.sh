@@ -29,6 +29,9 @@ today=$(date "+%m%d%Y")
 		cd ..
 	done
   else
+##undo pull
+##git reset --hard master@{"10 minutes ago"} 
+
 ##simply apply git commands to each folder
 	for entry in */
  	do
@@ -42,8 +45,10 @@ today=$(date "+%m%d%Y")
   if [ $function1 = "gc" ]
   then
 	echo "$today" >> gclog.txt
+
+##if gclog.txt doesn't exist, prompt gc
   else
-	lastd=$(awk 'END{print}' gclog.txt)
+	lastd=$(awk 'END{print}' gclog.txt) || { echo "no gc records yet, consider clean up maintenance"; exit 3; }
 	echo "no housekeeping since: ""$lastd""!"
   fi
 
