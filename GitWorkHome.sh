@@ -52,6 +52,22 @@ today=$(date "+%m%d%Y")
 		git reset --hard master@{"$resettime minutes ago"}
 	done
 
+##stats, lines and modified times
+  elif [ $function1 = "stats" ]
+  then
+	for entry in */
+	do
+		echo "$entry" ":"
+		entryname=${entry%/}
+		foldername="$dir""/""$entryname"
+		date -r "$foldername"		
+		cd $entry
+		echo "total commits: " $(git rev-list --count master)
+		git ls-files | grep "\(.py\|.sh\|.r\|.R\)$" | xargs wc -l
+		echo "-----------------------"
+		cd ..
+	done
+
 ##simply apply git commands to each folder
   else
 	for entry in */
