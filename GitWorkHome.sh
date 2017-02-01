@@ -2,7 +2,7 @@
 #sync git folder between home and work computers
 
 usage(){
-  echo "Usage: pull/status/gc/zip/undo"
+  echo "Usage: pull/stats/gc/zip/undo"
   echo ""
   exit 2
 }
